@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AprendiendoJava.iml" filepath="$PROJECT_DIR$/AprendiendoJava.iml" />
       <module fileurl="file://$PROJECT_DIR$/EjercicioInstrumentos/EjercicioInstrumentos.iml" filepath="$PROJECT_DIR$/EjercicioInstrumentos/EjercicioInstrumentos.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ejercicio_promedio_y_suma/Ejercicio_promedio_y_suma.iml" filepath="$PROJECT_DIR$/Ejercicio_promedio_y_suma/Ejercicio_promedio_y_suma.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC/JDBC.iml" filepath="$PROJECT_DIR$/JDBC/JDBC.iml" />
     </modules>
   </component>
 </project>
