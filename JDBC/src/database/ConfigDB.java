@@ -19,7 +19,7 @@ public class ConfigDB {
 
            String url = "jdbc:mysql://localhost:3306/ejerciciojdbc";
            String user = "root";
-           String password = "Rlwl2023*";
+           String password = "Rlwl2023.";
 
            //Establecer la conexión
            objConnection = (Connection) DriverManager.getConnection(url,user,password);

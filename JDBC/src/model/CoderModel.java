@@ -62,7 +62,7 @@ public class CoderModel implements CRUD {
             while (objRest.next()){
                 // Nota kevin: Podemos obtener el valor tambien con indices
                 //Lo haremos con nombre
-                objCoder.setId(objRest.getInt("id"));
+                objCoder.setId(objRest.getInt(1));
             }
 
             JOptionPane.showMessageDialog(null, "Se agregaron datos satisfactoriamente");
@@ -80,7 +80,7 @@ public class CoderModel implements CRUD {
         //Error dejado a propósito
         //Estudiar el retorno
         //La respuesta debe ser analizada junto con el controller.
-        return objCod;
+        return objCoder;
     }
 
     //Nos retornará una lista con el tipo de dato object, es decir, lo usamos con el fin de que nos retorne multiples datos y parsearlos o castearlos a nuestra conveniencia
@@ -142,12 +142,121 @@ public class CoderModel implements CRUD {
 
     @Override
     public boolean update(Object obj) {
+
+
+
+
+
         return false;
     }
 
     @Override
     public boolean delete(Object obj) {
-        return false;
+        //Convertimos el objeto a la entidad
+        Coder objCoder = (Coder) obj;
+
+
+        //Abrimos conexión y posterior creamos el try - Catch
+        // La connection ya tiene su propio try catch
+        Connection objConnection = ConfigDB.openConnection();
+
+
+        //Creamos una variable de estado
+        boolean isDeleted = false;
+
+        try {
+            //Sql
+            String sql = "DELETE FROM coder WHERE id = ?;";
+            //El preparedStatement se hace simepre con la conexion
+            PreparedStatement objPreprared = objConnection.prepareStatement(sql);
+
+            //Dar al valor al signo de interrogación
+            objPreprared.setInt(1, objCoder.getId());
+
+            //Ejecutamos el query
+            //Devuelve el numero de registros afectados.
+            int  totalAffectedRows = objPreprared.executeUpdate();
+
+
+
+            //Si se afectaron mas de 0 lineas quiere decir que si hubo algun cambio (En este caso eliminar);
+            if (totalAffectedRows >0){
+                isDeleted = true;
+                JOptionPane.showMessageDialog(null, "La actualización fue satisfactoria");
+
+            }
+
+        }catch (SQLException error){
+            JOptionPane.showMessageDialog(null, "Error" + error.getMessage());
+        }
+
+        ConfigDB.closeConecction();
+        return isDeleted;
     }
 
+
+
+    public Coder findById(int id){
+        //Abrimos la conexion
+        Connection objConnection = ConfigDB.openConnection();
+
+        Coder objCoder = null;
+
+        try {
+            //3. Sentencia SQL
+            String sql = "SELECT * FROM coder WHERE id = ?;";
+
+            PreparedStatement objPrepared = objConnection.prepareStatement(sql);
+
+            //Darle el valor al parametro del query
+            objPrepared.setInt(1, id);
+
+
+
+            //Resultado de una ejecucion
+            ResultSet objResult =  objPrepared.executeQuery();
+
+            if (objResult.next()){
+
+                //Traemos el coder de la base de datos del id que la pasamos
+                objCoder = new Coder();
+                objCoder.setAge(objResult.getInt("age"));
+                objCoder.setName(objResult.getString("name"));
+                objCoder.setClan(objResult.getString("clan"));
+                objCoder.setId(objResult.getInt("id"));
+            }
+
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error "  + e.getMessage());
+        }
+
+        return objCoder;
+    }
+
+
+    public Coder findByName(String name){
+        //Instanciamos Coder
+        Coder objCoder = null;
+        //Conexión
+        Connection objConnection = ConfigDB.openConnection();
+
+
+        try {
+            String sql = "SELECT * FROM coder where name like ?";
+            PreparedStatement objPrepared = objConnection.prepareStatement(sql);
+
+            //NO OLVIDAR, SI CREAMOS UNA SENTENCIA SQL, OBVIAMENTE LE TENEMOS QUE DAR VALOR SI EXISTE ALGUN SIGNO DE INTERROGACION
+            objPrepared.setString(1, name);
+
+
+
+            //Esto va dentro del if
+
+        }catch (SQLException error){
+            JOptionPane.showMessageDialog(null, "Error:" + error.getMessage());
+        };
+
+        return null;
+    }
 }
