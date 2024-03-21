@@ -1,3 +1,6 @@
+import controller.AutorController;
+import entity.Autor;
+
 import javax.swing.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -5,6 +8,10 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         String option = "";
+
+        //Instanciamos para acceder a sus metodos
+        AutorController objAutor = new AutorController();
+
 
         do {
             option = JOptionPane.showInputDialog("""
@@ -23,6 +30,15 @@ public class Main {
                     4 - Eliminar autor por id
                     5 - Salir
                     """);
+
+                        switch (autorOption){
+                            case "1":
+
+                                break;
+                            case "2":
+                                objAutor.findAll();
+                                break;
+                        }
                     }while (!option.equals(5));
 
                     break;

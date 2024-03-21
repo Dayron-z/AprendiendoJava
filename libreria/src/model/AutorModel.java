@@ -15,6 +15,7 @@ import java.util.List;
 public class AutorModel implements CRUD {
 
     @Override
+    // Inferimos desde la crud que para nosotros insertar requerimos obtener como parametro un object el, cual será proporcionado por el autorController
     public Object insert(Object obj) {
         //A esto le corresponde que le llegue un autor, hacer lógica insert esperando que los datos lleguen correctamente
         Autor objAutor = (Autor) obj;
@@ -29,6 +30,7 @@ public class AutorModel implements CRUD {
             String sql = " INSERT INTO autor (nombre, nacionalidad) VALUES (?,?);";
             PreparedStatement objPrepare = objConecction.prepareStatement(sql);
             /*-------*/
+            /*Usamos el objAutor para acceder a sus atributos, por eso que lo creamos como tipo author*/
             objPrepare.setString(1, objAutor.getNombre());
             objPrepare.setString(2, objAutor.getNacionalidad());
             /*-------*/
