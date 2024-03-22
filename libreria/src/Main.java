@@ -35,8 +35,12 @@ public class Main {
                                 break;
                             case "2":
                                 AutorController.GetAutorId();
+                                break;
                             case "3":
                                 AutorController.editarAutor();
+                                break;
+                            case "4":
+                                AutorController.eliminarAutor();
                                 break;
 
                         }
