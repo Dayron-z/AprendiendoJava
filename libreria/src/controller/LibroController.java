@@ -13,8 +13,8 @@ public class LibroController {
 
 
         int idAutor = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el id del autor del libro"));
-        Double precio = Double.parseDouble(JOptionPane.showInputDialog("Inserta el precio del libro"));
         String titulo = JOptionPane.showInputDialog("Ingresa el nombre del libro");
+        Double precio = Double.parseDouble(JOptionPane.showInputDialog("Inserta el precio del libro"));
         int año =  Integer.parseInt(JOptionPane.showInputDialog("Inserta el año de publicación del libro"));
 
 
@@ -138,10 +138,16 @@ public class LibroController {
 
         LibroModel objLibroModel = new LibroModel();
 
-        int id =  Integer.parseInt(JOptionPane.showInputDialog( objAutorController.findAllString() +  "\n Ingrese el id del autor del que desea ver sus libros"));
+        String listaString = "COINCIDENCIAS \n";
+
+        int id =  Integer.parseInt(JOptionPane.showInputDialog(objAutorController.findAllString() +  "\n Ingrese el id del autor del que desea ver sus libros"));
+
+        for (Libro iterador: objLibroModel.findByAutor(id)){
+            listaString += iterador.toString() + "\n";
+        }
 
 
-        objLibroModel.findByAutor(id);
+        JOptionPane.showMessageDialog(null, listaString );
 
     }
 

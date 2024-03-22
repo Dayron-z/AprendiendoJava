@@ -22,10 +22,11 @@ public class Main {
                     do {
                         autorOption = JOptionPane.showInputDialog("""
                     1 - Insertar autores
-                    2 - Buscar autor por id 
-                    3 - Actualizar autor por id
-                    4 - Eliminar autor por id
-                    5 - Salir
+                    2-  Listar autores 
+                    3 - Buscar autor por id 
+                    4 - Actualizar autor por id
+                    5 - Eliminar autor por id
+                    6 - Salir
                     """);
 
                         switch (autorOption){
@@ -33,19 +34,22 @@ public class Main {
                                 AutorController.insert();
                                 break;
                             case "2":
-                                AutorController.GetAutorId();
+                                AutorController.findAll();
                                 break;
                             case "3":
-                                AutorController.editarAutor();
+                                AutorController.GetAutorId();
                                 break;
                             case "4":
-                                AutorController.eliminarAutor();
+                                AutorController.editarAutor();
                                 break;
                             case "5":
+                                AutorController.eliminarAutor();
+                                break;
+                            case "6":
                                 AutorController.editarAutor();
                                 break;
                         }
-                    }while (!option.equals(5));
+                    }while (!option.equals(6));
 
                     break;
 
@@ -67,7 +71,7 @@ public class Main {
                         switch (libroOption){
                             case "1":
                                 LibroController.insert();
-                                //Corregir impresion.
+                                break;
                             case "2":
                                 LibroController.findAll();
                                 break;
@@ -79,6 +83,7 @@ public class Main {
                                 break;
                             case "5":
                                 LibroController.librosDeAutor();
+                                break;
                             case "6":
                                 LibroController.editarLibro();
                                 break;
@@ -89,9 +94,8 @@ public class Main {
                         }
                     }while (!option.equals(5));
                     break;
+
             }
-
-
         }while (!option.equals("3"));
     }
 }

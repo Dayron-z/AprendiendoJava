@@ -12,7 +12,7 @@ import javax.swing.*;
 
 
 public class AutorController {
-    public void findAll(){
+    public static void findAll(){
         AutorModel objModel = new AutorModel();
         //Inicializar string siempre que queramos mostrar de manera mas organizada
         String listAutors  = "️📝 Lista de autores \n";

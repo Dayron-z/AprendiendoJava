@@ -44,6 +44,7 @@ public class LibroModel implements CRUD {
             while (objRest.next()) {
                 // Obtener el valor del atributo "id" por su nombre
                 int getId = objRest.getInt(1);
+                objLibro.setId(getId);
             }
 
 
@@ -246,6 +247,9 @@ public class LibroModel implements CRUD {
 
                 listLibro.add(objLibro);
             }
+
+
+
 
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
