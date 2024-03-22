@@ -21,7 +21,7 @@ public class Main {
                     do {
                         autorOption = JOptionPane.showInputDialog("""
                     1 - Insertar autores
-                    2 - Buscar autor por id (Por el momento lista)
+                    2 - Buscar autor por id 
                     3 - Actualizar autor por id
                     4 - Eliminar autor por id
                     5 - Salir
@@ -40,7 +40,6 @@ public class Main {
                             case "4":
                                 AutorController.eliminarAutor();
                                 break;
-
                         }
                     }while (!option.equals(5));
 

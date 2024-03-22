@@ -82,7 +82,7 @@ public class AutorController {
         Autor objAutor = new Autor();
 
 
-        int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del autor que desea eliminar"));
+        int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del autor que desea editar"));
         //Pedimos los datos al usuario
         String nombre = JOptionPane.showInputDialog("Inserta el nombre");
         String nacionalidad = JOptionPane.showInputDialog("Inserta la nacionalidad");
