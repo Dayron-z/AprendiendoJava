@@ -196,6 +196,32 @@ public class LibroModel implements CRUD {
 
     @Override
     public boolean delete(Object obj) {
-        return false;
+        Libro objLibro = (Libro) obj;
+
+        Connection objConnection = ConfigDB.openConnection();
+
+        //Variable de estado
+        boolean eliminar = false;
+
+
+        try {
+            String sql = "DELETE FROM libro WHERE id = ?;";
+            PreparedStatement objPrepared = objConnection.prepareStatement(sql);
+
+            objPrepared.setInt(1, objLibro.getId());
+
+            int totalFilasAfectadas =  objPrepared.executeUpdate();
+
+            if (totalFilasAfectadas>0){
+                JOptionPane.showMessageDialog(null, "Se ha eliminado el libro exitosamente");
+                eliminar = true;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return eliminar;
     }
 }

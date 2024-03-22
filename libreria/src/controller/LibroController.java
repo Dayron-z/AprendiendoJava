@@ -118,6 +118,24 @@ public class LibroController {
     }
 
 
+    public static void eliminarLibro(){
+        LibroModel objAutorModel = new LibroModel();
+        Libro objLibro  = new Libro();
+
+        int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del libro que desea eliminar"));
+
+
+        objLibro.setId(id);
+        objAutorModel.delete(objLibro);
+
+    }
+
+
+
+
+
+
+
 
 
 }

@@ -60,6 +60,7 @@ public class Main {
                     3 - Buscar libros por id.
                     4 - Buscar libros por nombres 
                     6 - Editar libros por id.
+                    7 - Eliminar libro.
                     """);
 
                         switch (libroOption){
@@ -77,6 +78,11 @@ public class Main {
                                 break;
                             case "6":
                                 LibroController.editarLibro();
+                                break;
+                            case "7":
+                                LibroController.eliminarLibro();
+                                break;
+
                         }
                     }while (!option.equals(5));
                     break;
