@@ -1,14 +1,9 @@
-
-
-import controller.AutorController;
-
 import javax.swing.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-
         String option = "";
 
         do {
@@ -28,22 +23,6 @@ public class Main {
                     4 - Eliminar autor por id
                     5 - Salir
                     """);
-
-                        switch (autorOption){
-                            case "1":
-                                AutorController.insert();
-                                break;
-                            case "2":
-                                AutorController.GetAutorId();
-                                break;
-                            case "3":
-                                AutorController.editarAutor();
-                                break;
-                            case "4":
-                                AutorController.eliminarAutor();
-                                break;
-
-                        }
                     }while (!option.equals(5));
 
                     break;

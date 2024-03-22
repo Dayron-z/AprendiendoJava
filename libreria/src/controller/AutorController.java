@@ -11,11 +11,10 @@ import javax.swing.*;
 //Ver en detalle a agregar
 
 public class AutorController {
-
-    public static void findAll(){
+    public void findAll(){
         AutorModel objModel = new AutorModel();
         //Inicializar string siempre que queramos mostrar de manera mas organizada
-        String listAutors  = "️📝 Lista de autores \n";
+        String listAutors  = "️📝 AUTHOR LIST \n";
 
         //Ponemos tipo de dato object porque con eso estamos trabajando
         for (Object autor: objModel.findAll()){
@@ -26,6 +25,7 @@ public class AutorController {
 
         JOptionPane.showMessageDialog(null,  listAutors);
     }
+
 
     public static String findAllString(){
         AutorModel objModel = new AutorModel();
@@ -83,8 +83,8 @@ public class AutorController {
 
         int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del autor que desea eliminar"));
         //Pedimos los datos al usuario
-        String nombre = JOptionPane.showInputDialog("Ingresa el nombre");
-        String nacionalidad = JOptionPane.showInputDialog("Ingresa la nacionalidad");
+        String nombre = JOptionPane.showInputDialog("Inserta el nombre");
+        String nacionalidad = JOptionPane.showInputDialog("Inserta la nacionalidad");
 
 
 
@@ -96,18 +96,6 @@ public class AutorController {
 
     }
 
-
-    public static void eliminarAutor(){
-        AutorModel objAutorModel = new AutorModel();
-        Autor objAutor = new Autor();
-
-        int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del autor que desea eliminar"));
-
-
-        objAutor.setId(id);
-        objAutorModel.delete(objAutor);
-
-    }
 
 
 }

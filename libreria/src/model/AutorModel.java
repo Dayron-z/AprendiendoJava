@@ -133,33 +133,14 @@ public class AutorModel implements CRUD {
 
     @Override
     public boolean delete(Object obj) {
-        Autor objAutor = (Autor) obj;
-
-        Connection objConnection = ConfigDB.openConnection();
-
-        //Variable de estado
-        boolean eliminar = false;
 
 
-        try {
-            String sql = "DELETE FROM autor WHERE id = ?;";
-            PreparedStatement objPrepared = objConnection.prepareStatement(sql);
-
-            objPrepared.setInt(1, objAutor.getId());
-
-            int totalFilasAfectadas =  objPrepared.executeUpdate();
-
-            if (totalFilasAfectadas>0){
-                JOptionPane.showMessageDialog(null, "Se ha eliminado a el autor exitosamente");
-                eliminar = true;
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
 
-        return eliminar;
+
+
+
+        return false;
     }
 
 
@@ -175,7 +156,6 @@ public class AutorModel implements CRUD {
 
             while (objRest.next()){
 
-                //Seteamos con valores recibidos de la base de datos
                 objAutor.setId(objRest.getInt("id"));
                 objAutor.setNombre(objRest.getString("nombre"));
                 objAutor.setNacionalidad(objRest.getString("nacionalidad"));
