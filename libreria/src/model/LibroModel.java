@@ -120,7 +120,6 @@ public class LibroModel implements CRUD {
         return objLibro;
     }
 
-
     @Override
     public boolean update(Object obj) {
         Libro objLibro = (Libro) obj;
@@ -157,7 +156,6 @@ public class LibroModel implements CRUD {
 
     }
 
-
     public List<Libro> findByName(String titulo) {
         //Creamos la lista
         List<Libro> listLibro = new ArrayList<>();
@@ -192,8 +190,6 @@ public class LibroModel implements CRUD {
         return listLibro;
     }
 
-
-
     @Override
     public boolean delete(Object obj) {
         Libro objLibro = (Libro) obj;
@@ -224,4 +220,40 @@ public class LibroModel implements CRUD {
 
         return eliminar;
     }
+
+    public List<Libro> findByAutor(int id) {
+        //Creamos la lista
+        List<Libro> listLibro = new ArrayList<>();
+        //Abrimos la conexión
+        Connection objConnection = ConfigDB.openConnection();
+        try {
+            //Sentencia SQL
+            String sql = "SELECT * FROM libro where id_autor = ?;";
+            //Preparar el statement
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
+            objPrepare.setInt(1, id);
+
+            ResultSet objResult = objPrepare.executeQuery();
+
+            while (objResult.next()){
+                Libro objLibro = new Libro();
+
+                objLibro.setId(objResult.getInt("id"));
+                objLibro.setId_autor(objResult.getInt("id_autor"));
+                objLibro.setPrecio(objResult.getDouble("precio"));
+                objLibro.setTitulo(objResult.getString("titulo"));
+                objLibro.setAño_publicacion(objResult.getInt("año_de_publicación"));
+
+                listLibro.add(objLibro);
+            }
+
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        ConfigDB.closeConnection();
+        return listLibro;
+    }
+
+
 }

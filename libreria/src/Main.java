@@ -59,6 +59,7 @@ public class Main {
                     2 - Ver todos los libros disponibles
                     3 - Buscar libros por id.
                     4 - Buscar libros por nombres 
+                    5 - Buscar libros por autor
                     6 - Editar libros por id.
                     7 - Eliminar libro.
                     """);
@@ -76,6 +77,8 @@ public class Main {
                             case "4":
                                 LibroController.getByName();
                                 break;
+                            case "5":
+                                LibroController.librosDeAutor();
                             case "6":
                                 LibroController.editarLibro();
                                 break;

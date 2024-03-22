@@ -119,17 +119,31 @@ public class LibroController {
 
 
     public static void eliminarLibro(){
-        LibroModel objAutorModel = new LibroModel();
+
+        LibroModel objLibroModel = new LibroModel();
         Libro objLibro  = new Libro();
 
-        int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del libro que desea eliminar"));
+        int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString() + "\n Ingrese el id del libro que desea eliminar"));
 
 
         objLibro.setId(id);
-        objAutorModel.delete(objLibro);
+        objLibroModel.delete(objLibro);
 
     }
 
+
+
+    public static void librosDeAutor(){
+        AutorController objAutorController = new AutorController();
+
+        LibroModel objLibroModel = new LibroModel();
+
+        int id =  Integer.parseInt(JOptionPane.showInputDialog( objAutorController.findAllString() +  "\n Ingrese el id del autor del que desea ver sus libros"));
+
+
+        objLibroModel.findByAutor(id);
+
+    }
 
 
 
