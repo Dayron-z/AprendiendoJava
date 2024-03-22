@@ -2,23 +2,15 @@ package entity;
 
 public class Libro {
     private int id;
+    private double precio;
     private String titulo;
     private int  año_publicacion;
     private int id_autor;
 
 
-    @Override
-    public String toString() {
-        return "Libro{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", año_publicacion=" + año_publicacion +
-                ", id_autor=" + id_autor +
-                '}';
-    }
-
-    public Libro(int id, String titulo, int año_publicacion, int id_autor) {
+    public Libro(int id, double precio, String titulo, int año_publicacion, int id_autor) {
         this.id = id;
+        this.precio = precio;
         this.titulo = titulo;
         this.año_publicacion = año_publicacion;
         this.id_autor = id_autor;
@@ -34,6 +26,14 @@ public class Libro {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     public String getTitulo() {

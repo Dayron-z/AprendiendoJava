@@ -28,7 +28,7 @@ public class AutorModel implements CRUD {
         try {
             //Preparamos el sql
             String sql = " INSERT INTO autor (nombre, nacionalidad) VALUES (?,?);";
-            PreparedStatement objPrepare = objConecction.prepareStatement(sql);
+            PreparedStatement objPrepare = objConecction.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             /*-------*/
             /*Usamos el objAutor para acceder a sus atributos, por eso que lo creamos como tipo author*/
             objPrepare.setString(1, objAutor.getNombre());
@@ -44,10 +44,10 @@ public class AutorModel implements CRUD {
             //Acá obtenemos el id, pero como tal
             while (objRest.next()) {
                 // Obtener el valor del atributo "id" por su nombre
-                int id = objRest.getInt("id");
+                int GetId = objRest.getInt(1);
                 //Linea señalada en rojo por si hay problemas en algun momento, cambiar por 1
                 // Asignar el valor del atributo "id" al objeto "objAutor"
-                objAutor.setId(id);
+                objAutor.setId(GetId);
             }
 
 
@@ -69,7 +69,7 @@ public class AutorModel implements CRUD {
 
         try {
             //Preparamos el sql
-            String sql = "SELECT * FROM Autor;";
+            String sql = "SELECT * FROM autor;";
             PreparedStatement objPrepared = objConnection.prepareStatement(sql);
 
             //Esto no es necesario proporcionarle mas datos del lenguaje sql, por ende procedemos ejecutar esperando un retorno(ResulSet) para hacer un while.
@@ -82,9 +82,9 @@ public class AutorModel implements CRUD {
                 //Acá se refleja la necesidad de un constructor vacío, nos sirve para poder proporcionar los datos después
                 Autor objAutor = new Autor();
 
-                objAutor.setId(objAutor.getId());
-                objAutor.setNombre(objAutor.getNombre());
-                objAutor.setNacionalidad(objAutor.getNacionalidad());
+                objAutor.setId(objRest.getInt("id"));
+                objAutor.setNombre(objRest.getString("nombre"));
+                objAutor.setNacionalidad(objRest.getString("nacionalidad"));
 
                 listaAutores.add(objAutor);
             }
@@ -102,11 +102,72 @@ public class AutorModel implements CRUD {
 
     @Override
     public boolean update(Object obj) {
-        return false;
+
+        Autor objAutor = (Autor) obj;
+
+        Connection objConnection = ConfigDB.openConnection();
+
+        //Variable de estado
+        boolean editar = false;
+
+        try {
+            String sql = "UPDATE autor SET nombre = ?, nacionalidad = ?  WHERE (id = ?);";
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
+            objPrepare.setString(1, objAutor.getNombre());
+            objPrepare.setString(2, objAutor.getNacionalidad());
+            objPrepare.setInt(3, objAutor.getId());
+
+            int totalFilasAfectadas =   objPrepare.executeUpdate();
+
+            if (totalFilasAfectadas>0){
+                JOptionPane.showMessageDialog(null, "Se ha actualizado al autor exitosamente");
+                 editar = true;
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        return editar;
     }
 
     @Override
     public boolean delete(Object obj) {
         return false;
     }
+
+
+    public Autor getAuthorById(int autorId){
+        Connection objConenection = ConfigDB.openConnection();
+        Autor objAutor = new Autor();
+
+        try {
+            String sql = "SELECT * FROM autor WHERE autor.id = " + autorId + ";";
+            PreparedStatement objPrepare= objConenection.prepareStatement(sql);
+
+            ResultSet objRest = objPrepare.executeQuery();
+
+            while (objRest.next()){
+/*                objAutor.setId(objAutor.getId());
+                objAutor.setNombre(objAutor.getNombre());
+                objAutor.*/
+
+                //Seteamos con valores recibidos de la base de datos
+                objAutor.setId(objRest.getInt("id"));
+                objAutor.setNombre(objRest.getString("nombre"));
+                objAutor.setNacionalidad(objRest.getString("nacionalidad"));
+            }
+
+
+        }catch (Exception error){
+            JOptionPane.showMessageDialog(null, "Error" + error.getMessage());
+        }
+
+
+
+        return objAutor;
+    }
+
+
+
 }

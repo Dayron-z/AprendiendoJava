@@ -1,5 +1,6 @@
+
+
 import controller.AutorController;
-import entity.Autor;
 
 import javax.swing.*;
 
@@ -7,11 +8,8 @@ import javax.swing.*;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+
         String option = "";
-
-        //Instanciamos para acceder a sus metodos
-        AutorController objAutor = new AutorController();
-
 
         do {
             option = JOptionPane.showInputDialog("""
@@ -33,11 +31,14 @@ public class Main {
 
                         switch (autorOption){
                             case "1":
-
+                                AutorController.insert();
                                 break;
                             case "2":
-                                objAutor.findAll();
+                                AutorController.GetAutorId();
+                            case "3":
+                                AutorController.editarAutor();
                                 break;
+
                         }
                     }while (!option.equals(5));
 
