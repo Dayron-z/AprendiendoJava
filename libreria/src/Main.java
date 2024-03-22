@@ -41,6 +41,9 @@ public class Main {
                             case "4":
                                 AutorController.eliminarAutor();
                                 break;
+                            case "5":
+                                AutorController.editarAutor();
+                                break;
                         }
                     }while (!option.equals(5));
 
@@ -56,6 +59,7 @@ public class Main {
                     2 - Ver todos los libros disponibles
                     3 - Buscar libros por id.
                     4 - Buscar libros por nombres 
+                    6 - Editar libros por id.
                     """);
 
                         switch (libroOption){
@@ -71,6 +75,8 @@ public class Main {
                             case "4":
                                 LibroController.getByName();
                                 break;
+                            case "6":
+                                LibroController.editarLibro();
                         }
                     }while (!option.equals(5));
                     break;

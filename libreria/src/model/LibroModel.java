@@ -123,7 +123,38 @@ public class LibroModel implements CRUD {
 
     @Override
     public boolean update(Object obj) {
-        return false;
+        Libro objLibro = (Libro) obj;
+
+        Connection objConnection = ConfigDB.openConnection();
+
+        //Variable de estado
+        boolean editar = false;
+
+        try {
+            String sql = "UPDATE libro SET titulo = ?, año_de_publicación = ?, precio = ?, id_autor = ? WHERE (id = ?);";
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
+
+
+            objPrepare.setString(1, objLibro.getTitulo());
+            objPrepare.setInt(2, objLibro.getAño_publicacion());
+            objPrepare.setDouble(3, objLibro.getPrecio());
+            objPrepare.setInt(4, objLibro.getId_autor());
+            objPrepare.setInt(5, objLibro.getId());
+
+
+            int totalFilasAfectadas =   objPrepare.executeUpdate();
+
+            if (totalFilasAfectadas>0){
+                JOptionPane.showMessageDialog(null, "Se ha actualizado libro exitosamente");
+                editar = true;
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        return editar;
+
     }
 
 
@@ -160,9 +191,6 @@ public class LibroModel implements CRUD {
         ConfigDB.closeConnection();
         return listLibro;
     }
-
-
-
 
 
 
