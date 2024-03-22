@@ -25,7 +25,6 @@ public class LibroModel implements CRUD {
         Connection objConecction = ConfigDB.openConnection();
 
         try {
-
             String sql = " INSERT INTO libro (precio, titulo, año_de_publicación, id_autor) VALUES (?,?,?,?);";
             PreparedStatement objPrepare = objConecction.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             objPrepare.setDouble(1, objLibro.getPrecio());

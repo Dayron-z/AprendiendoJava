@@ -14,20 +14,21 @@ public class Main {
             option = JOptionPane.showInputDialog("""
                     1 - Gestion autores
                     2 - Gestion libros
+                    3 - Salir
                     """);
             switch (option){
                 case "1":
-                    String autorOption = "";
+                    String autorOption;
 
                     do {
                         autorOption = JOptionPane.showInputDialog("""
-                    1 - Insertar autores
-                    2-  Listar autores 
-                    3 - Buscar autor por id 
-                    4 - Actualizar autor por id
-                    5 - Eliminar autor por id
-                    6 - Salir
-                    """);
+                                1 - Insertar autores
+                                2 - Listar autores 
+                                3 - Buscar autor por id 
+                                4 - Actualizar autor por id
+                                5 - Eliminar autor por id
+                                6 - Salir
+                                """);
 
                         switch (autorOption){
                             case "1":
@@ -45,28 +46,26 @@ public class Main {
                             case "5":
                                 AutorController.eliminarAutor();
                                 break;
-                            case "6":
-                                AutorController.editarAutor();
-                                break;
                         }
-                    }while (!option.equals(6));
+                    } while (!autorOption.equals("6")); // Salir del bucle cuando se selecciona la opción "6"
 
                     break;
 
 
                 case "2":
-                    String libroOption  = "";
+                    String libroOption;
 
                     do {
                         libroOption = JOptionPane.showInputDialog("""
-                    1 - Insertar libro
-                    2 - Ver todos los libros disponibles
-                    3 - Buscar libros por id.
-                    4 - Buscar libros por nombres 
-                    5 - Buscar libros por autor
-                    6 - Editar libros por id.
-                    7 - Eliminar libro.
-                    """);
+                                1 - Insertar libro
+                                2 - Ver todos los libros disponibles
+                                3 - Buscar libros por id.
+                                4 - Buscar libros por nombres 
+                                5 - Buscar libros por autor
+                                6 - Editar libros por id.
+                                7 - Eliminar libro.
+                                8 - Salir.
+                                """);
 
                         switch (libroOption){
                             case "1":
@@ -90,12 +89,10 @@ public class Main {
                             case "7":
                                 LibroController.eliminarLibro();
                                 break;
-
                         }
-                    }while (!option.equals(5));
+                    } while (!libroOption.equals("8"));
                     break;
-
             }
-        }while (!option.equals("3"));
+        } while (!option.equals("3"));
     }
 }
