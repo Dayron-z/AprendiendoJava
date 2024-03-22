@@ -19,7 +19,7 @@ public class ConfigDB {
             //Creamos las varaibles de conexión
             String url = "jdbc:mysql://localhost:3306/libreria";
             String user = "root";
-            String password = "Rlwl2023*";
+            String password = "Rlwl2023.";
 
             //Establecemos conexión
             objConnection = (Connection) DriverManager.getConnection(url, user, password );
@@ -29,9 +29,6 @@ public class ConfigDB {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error" + e.getMessage());
         }
-
-
-
 
         return objConnection;
     }

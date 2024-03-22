@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LibroModel implements CRUD {
@@ -25,11 +26,12 @@ public class LibroModel implements CRUD {
 
         try {
 
-            String sql = " INSERT INTO libro (precio, titulo, año_de_publicación) VALUES (?,?, ?);";
+            String sql = " INSERT INTO libro (precio, titulo, año_de_publicación, id_autor) VALUES (?,?,?,?);";
             PreparedStatement objPrepare = objConecction.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             objPrepare.setDouble(1, objLibro.getPrecio());
             objPrepare.setString(2, objLibro.getTitulo());
             objPrepare.setInt(3, objLibro.getAño_publicacion());
+            objPrepare.setInt(4, objLibro.getId_autor());
             /*-------*/
             /*Ejecutamos*/
             objPrepare.execute();
@@ -42,11 +44,6 @@ public class LibroModel implements CRUD {
             while (objRest.next()) {
                 // Obtener el valor del atributo "id" por su nombre
                 int getId = objRest.getInt(1);
-                int  getAutorId  = objRest.getInt(5);
-                //Linea señalada en rojo por si hay problemas en algun momento, cambiar por 1
-                // Asignar el valor del atributo "id" al objeto "objAutor"
-                objLibro.setId(getId);
-                objLibro.setId_autor(getAutorId);
             }
 
 
@@ -61,13 +58,113 @@ public class LibroModel implements CRUD {
 
     @Override
     public List<Object> findAll() {
-        return null;
+        List<Object> listaLibros = new ArrayList<>();
+        Connection objConnection = ConfigDB.openConnection();
+
+        try {
+            //Preparamos el sql
+            String sql = "SELECT * FROM libro;";
+            PreparedStatement objPrepared = objConnection.prepareStatement(sql);
+
+            ResultSet objRest = objPrepared.executeQuery();
+
+
+            while (objRest.next()) {
+                //Acá se refleja la necesidad de un constructor vacío, nos sirve para poder proporcionar los datos después
+                Libro objLibro = new Libro();
+
+                objLibro.setId(objRest.getInt("id"));
+                objLibro.setId_autor(objRest.getInt("id_autor"));
+                objLibro.setPrecio(objRest.getDouble("precio"));
+                objLibro.setTitulo(objRest.getString("titulo"));
+                objLibro.setAño_publicacion(objRest.getInt("año_de_publicación"));
+
+
+                listaLibros.add(objLibro);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return listaLibros;
     }
+
+    public Libro getLibroById(int libroId){
+        Connection objConenection = ConfigDB.openConnection();
+        Libro objLibro = new Libro();
+
+        try {
+            String sql = "SELECT * FROM libro WHERE libro.id = " + libroId + ";";
+            PreparedStatement objPrepare= objConenection.prepareStatement(sql);
+
+            ResultSet objRest = objPrepare.executeQuery();
+
+            while (objRest.next()){
+
+                objLibro.setId(objRest.getInt("id"));
+                objLibro.setId_autor(objRest.getInt("id_autor"));
+                objLibro.setPrecio(objRest.getDouble("precio"));
+                objLibro.setTitulo(objRest.getString("titulo"));
+                objLibro.setAño_publicacion(objRest.getInt("año_de_publicación"));
+            }
+
+
+        }catch (Exception error){
+            JOptionPane.showMessageDialog(null, "Error" + error.getMessage());
+        }
+
+
+
+        return objLibro;
+    }
+
 
     @Override
     public boolean update(Object obj) {
         return false;
     }
+
+
+    public List<Libro> findByName(String titulo) {
+        //Creamos la lista
+        List<Libro> listLibro = new ArrayList<>();
+        //Abrimos la conexión
+        Connection objConnection = ConfigDB.openConnection();
+        try {
+            //Sentencia SQL
+            String sql = "SELECT * FROM libro WHERE titulo LIKE ?;";
+            //Preparar el statement
+            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
+            objPrepare.setString(1,"%"+titulo+"%");
+
+            ResultSet objResult = objPrepare.executeQuery();
+
+            while (objResult.next()){
+                Libro objLibro = new Libro();
+
+                objLibro.setId(objResult.getInt("id"));
+                objLibro.setId_autor(objResult.getInt("id_autor"));
+                objLibro.setPrecio(objResult.getDouble("precio"));
+                objLibro.setTitulo(objResult.getString("titulo"));
+                objLibro.setAño_publicacion(objResult.getInt("año_de_publicación"));
+
+                listLibro.add(objLibro);
+            }
+
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        ConfigDB.closeConnection();
+        return listLibro;
+    }
+
+
+
+
+
 
     @Override
     public boolean delete(Object obj) {

@@ -15,7 +15,7 @@ public class AutorController {
     public void findAll(){
         AutorModel objModel = new AutorModel();
         //Inicializar string siempre que queramos mostrar de manera mas organizada
-        String listAutors  = "️📝 AUTHOR LIST \n";
+        String listAutors  = "️📝 Lista de autores \n";
 
         //Ponemos tipo de dato object porque con eso estamos trabajando
         for (Object autor: objModel.findAll()){

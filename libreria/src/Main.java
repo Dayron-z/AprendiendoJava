@@ -53,11 +53,23 @@ public class Main {
                     do {
                         libroOption = JOptionPane.showInputDialog("""
                     1 - Insertar libro
+                    2 - Ver todos los libros disponibles
+                    3 - Buscar libros por id.
+                    4 - Buscar libros por nombres 
                     """);
 
                         switch (libroOption){
                             case "1":
                                 LibroController.insert();
+                                //Corregir impresion.
+                            case "2":
+                                LibroController.findAll();
+                                break;
+                            case "3":
+                                LibroController.GetLibroId();
+                                break;
+                            case "4":
+                                LibroController.getByName();
                                 break;
                         }
                     }while (!option.equals(5));
