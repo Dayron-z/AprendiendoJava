@@ -1,4 +1,5 @@
 import controller.AutorController;
+import controller.LibroController;
 
 import javax.swing.*;
 
@@ -43,6 +44,23 @@ public class Main {
                         }
                     }while (!option.equals(5));
 
+                    break;
+
+
+                case "2":
+                    String libroOption  = "";
+
+                    do {
+                        libroOption = JOptionPane.showInputDialog("""
+                    1 - Insertar libro
+                    """);
+
+                        switch (libroOption){
+                            case "1":
+                                LibroController.insert();
+                                break;
+                        }
+                    }while (!option.equals(5));
                     break;
             }
 
