@@ -83,8 +83,8 @@ public class AutorController {
 
         int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del autor que desea eliminar"));
         //Pedimos los datos al usuario
-        String nombre = JOptionPane.showInputDialog("Inserta el nombre");
-        String nacionalidad = JOptionPane.showInputDialog("Inserta la nacionalidad");
+        String nombre = JOptionPane.showInputDialog("Ingresa el nombre");
+        String nacionalidad = JOptionPane.showInputDialog("Ingresa la nacionalidad");
 
 
 
@@ -93,6 +93,19 @@ public class AutorController {
         objAutor.setNombre(nombre);
 
         objAutorModel.update(objAutor);
+
+    }
+
+
+    public static void eliminarAutor(){
+        AutorModel objAutorModel = new AutorModel();
+        Autor objAutor = new Autor();
+
+        int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del autor que desea eliminar"));
+
+
+        objAutor.setId(id);
+        objAutorModel.delete(objAutor);
 
     }
 
