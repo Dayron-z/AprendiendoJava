@@ -97,6 +97,18 @@ public class AutorController {
 
     }
 
+    public static void eliminarAutor(){
+        AutorModel objAutorModel = new AutorModel();
+        Autor objAutor = new Autor();
+
+        int id =  Integer.parseInt(JOptionPane.showInputDialog( findAllString()  + "\n Ingrese el id del autor que desea eliminar"));
+
+
+        objAutor.setId(id);
+        objAutorModel.delete(objAutor);
+
+    }
+
 
 
 }
